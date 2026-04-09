@@ -1,5 +1,55 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [1.0.0] - 2026-04-09
+
+### Added
+- Native Claude Code plugin support via `.claude-plugin/plugin.json`
+- Self-referential marketplace manifest `.claude-plugin/marketplace.json`
+  (marketplace name: `komluk-tools`)
+- CI/CD GitHub Actions workflows: `validate.yml` (JSON/YAML/bash lints,
+  placeholder sanity, install idempotency) and `release.yml` (tag-to-release
+  automation with version match enforcement)
+- Pre-rendered sensible defaults for the 6 `__CLAUDE_HOME_*__` placeholders
+  (Strategy C hybrid): plugin users get a zero-config install; `install.sh`
+  users keep full parametrization via `~/.claude-home.env`
+- Semver + automatic GitHub Releases on `v*` tag push, with `install.sh`,
+  `uninstall.sh`, and `.claude-home.env.example` attached as assets
+- README sections documenting both install flows (plugin + clone+install.sh)
+  and when to pick each
+
+### Changed
+- `install.sh` uses a template-to-destination model: sources are pulled from
+  `templates/*.tmpl` (canonical placeholder form) and rendered into `--target`,
+  rather than in-place substitution on the destination tree
+- README restructured with "Option A (Plugin)" and "Option B (Clone)" sections
+- CHANGELOG migrated to [Keep a Changelog](https://keepachangelog.com/) format
+
+### Migration notes (Phase A to Phase B)
+- Phase A users: `./install.sh --target ~/.claude` still works; env vars in
+  `~/.claude-home.env` are still honored, idempotency is preserved
+- Phase B users: install with
+  ```
+  /plugin marketplace add komluk/claude-home
+  /plugin install claude-home@komluk-tools
+  ```
+  Because `komluk/claude-home` is a **private** repository, the Claude Code
+  CLI must be authenticated via `gh auth login` with `repo` scope before
+  running the marketplace add command
+- Both flows coexist; pick one per machine, do not mix
+- Plugin components are loaded under the `claude-home:*` namespace (e.g.
+  `claude-home:developer`, `/claude-home:workflow`)
+
+### Components shipped
+- 30 skills, 11 agents, 14 commands (4 general + 10 spec), 7 hooks
+- 4 templates, 2 validators, 1 output-style, 2 YAML workflow definitions
+
 ## v0.1.0 (2026-04-09)
 
 Initial migration from `scaffolding.tool` phase A (steps 1-5 of proposal).
