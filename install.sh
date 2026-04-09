@@ -114,11 +114,9 @@ else
   prompt_for CLAUDE_HOME_TEST_BACKEND_CMD "Backend test command" "${CONFIG[CLAUDE_HOME_TEST_BACKEND_CMD]:-echo '[claude-home] no backend tests configured' && true}"
   prompt_for CLAUDE_HOME_TEST_FRONTEND_CMD "Frontend validate command" "${CONFIG[CLAUDE_HOME_TEST_FRONTEND_CMD]:-echo '[claude-home] no frontend validation configured' && true}"
   prompt_for CLAUDE_HOME_SONAR_PROJECT_KEY "SonarQube project key (empty to skip)" "${CONFIG[CLAUDE_HOME_SONAR_PROJECT_KEY]:-}"
-  prompt_for CLAUDE_HOME_SONAR_URL "SonarQube URL (empty to skip)" "${CONFIG[CLAUDE_HOME_SONAR_URL]:-}"
   prompt_for CLAUDE_HOME_SCHEMAS_DIR "OpenSpec schemas dir" "${CONFIG[CLAUDE_HOME_SCHEMAS_DIR]:-./.scaffolding/openspec/schemas}"
   prompt_for CLAUDE_HOME_PROJECT_NAME "Project name" "${CONFIG[CLAUDE_HOME_PROJECT_NAME]:-$(basename "$PWD")}"
   prompt_for CLAUDE_HOME_BACKEND_EXAMPLE_PATH "Example backend feature path" "${CONFIG[CLAUDE_HOME_BACKEND_EXAMPLE_PATH]:-app/backend/app/feature/}"
-  prompt_for CLAUDE_HOME_VENV_PATH "Relative venv path (auto-detect if empty)" "${CONFIG[CLAUDE_HOME_VENV_PATH]:-}"
 
   # --- persist config ---
   if ! $DRY_RUN; then
