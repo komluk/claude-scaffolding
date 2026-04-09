@@ -62,8 +62,10 @@ claude-home/
 │                    researcher, reviewer, tech-writer)
 ├── skills/         30 skili (api-design, error-handling, pattern-recognition,
 │                    spec-*, mui-styling, python-patterns, testing-strategy, ...)
-├── commands/       Podstawowe komendy slash (context, execute-prp,
-│                    generate-prp, init-openspec)
+├── commands/       14 komend slash: 4 top-level (context, execute-prp,
+│                    generate-prp, init-openspec) + 10 w `commands/specs/`
+│                    (apply, archive, bulk-archive, continue, explore, ff,
+│                    new, onboard, sync, verify) -- namespaced komendy OpenSpec
 ├── hooks/          7 hookow bezpieczenstwa (block-destructive-rm,
 │                    block-env-write, pre-commit-validation, ...)
 ├── templates/      Szablony PRP (base, planning, spec)
