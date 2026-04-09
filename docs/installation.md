@@ -36,6 +36,30 @@ chcesz).
 Jesli projekt juz ma `.claude/` z wlasnymi agentami i chcesz dolozyc
 claude-home na wierzchu: sprawdz najpierw `docs/adopting-in-legacy-repo.md`.
 
+## Pierwsze uruchomienie
+
+Po przejsciu `install.sh` uruchom `claude` w dowolnym repozytorium, zeby
+potwierdzic, ze konfiguracja ladowala sie poprawnie. Szybki smoke test,
+ktory nie wymaga logowania:
+
+```bash
+claude --version
+```
+
+Jesli uzywasz izolowanego `CLAUDE_CONFIG_DIR` (np. osobny katalog per
+klient albo per projekt), pamietaj ze **kazdy config dir ma wlasny token
+autoryzacyjny**. Musisz raz wykonac `/login` wewnatrz kazdego takiego
+katalogu, zanim agenty beda mogly wolac API:
+
+```bash
+CLAUDE_CONFIG_DIR=/path/to/isolated/.claude claude
+# w sesji:
+/login
+```
+
+Dopiero po zapisaniu tokenu dla danego `CLAUDE_CONFIG_DIR` wszystkie
+kolejne uruchomienia beda dzialac bez monitu.
+
 ## Wymagania
 
 - `git`
