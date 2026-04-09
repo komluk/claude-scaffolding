@@ -219,12 +219,21 @@ for f in "${TEMPLATES[@]}"; do
   render_file "$f"
 done
 
-# --- sanity check: no placeholder left in rendered files ---
+# --- sanity check: no placeholder left in rendered template files ---
+# Only the TEMPLATES list is scanned; documentation files (README, CHANGELOG,
+# docs/, install.sh) legitimately mention `__CLAUDE_HOME_*__` names as
+# reference and must not trigger this check.
 if ! $DRY_RUN; then
-  leftover=$(grep -rn "__CLAUDE_HOME_" "$TARGET" --include="*.md" --include="*.json" --include="*.sh" 2>/dev/null || true)
+  leftover=""
+  for rel in "${TEMPLATES[@]}"; do
+    dst="$TARGET/$rel"
+    [[ ! -f "$dst" ]] && continue
+    if grep -Hn "__CLAUDE_HOME_" "$dst" 2>/dev/null; then
+      leftover="found"
+    fi
+  done
   if [[ -n "$leftover" ]]; then
-    echo "[error] unreplaced placeholders found:" >&2
-    echo "$leftover" >&2
+    echo "[error] unreplaced placeholders found in rendered templates (see above)" >&2
     exit 2
   fi
   echo "[ok] claude-home installed to $TARGET"
