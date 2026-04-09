@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `SessionStart` hooks with `startup` and `resume` matchers that inject the full
+  routing protocol (blocked subagent types, mandatory behavior, all 11 agents,
+  decision tree, delegation format) on every new and resumed session. Fixes the
+  problem where Claude ignores agents and skills in projects installed via
+  `/plugin install` because the plugin's `CLAUDE.md` is not in `$CWD`.
+- `/init-claude-scaffolding` slash command for the marketplace-install flow:
+  detects the plugin directory and copies `CLAUDE.md` + `settings.json` into the
+  current project (no overwrite). Closes the gap between plugin install and
+  `install.sh --target` flows.
+
+### Changed
+- README: added prominent note explaining the two install flows and why
+  `/init-claude-scaffolding` must be run after `/plugin install` to get `CLAUDE.md`
+  into the target repo.
+
+---
+
 > **Note:** 2026-04-09 -- Project renamed from `claude-home` to
 > `claude-scaffolding`. Repository URL, marketplace name, plugin name, env
 > file, and placeholder prefix (`__CLAUDE_HOME_*__` -> `__CLAUDE_SCAFFOLDING_*__`)

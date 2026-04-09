@@ -1,0 +1,91 @@
+# /init-claude-scaffolding Command
+
+Bootstrap a new project with the claude-scaffolding CLAUDE.md and settings.json.
+
+## Usage
+
+```
+/init-claude-scaffolding
+```
+
+Run from the root of a project that was set up via `/plugin install claude-scaffolding@komluk-scaffolding`.
+This command copies the routing protocol and settings into the project so Claude respects
+the agent delegation rules on every session.
+
+## What It Does
+
+1. Locates the installed plugin directory (searches known marketplace cache paths)
+2. Copies `CLAUDE.md` to `$CWD/CLAUDE.md` — only if not already present (no overwrite)
+3. Copies `settings.json` to `$CWD/.claude/settings.json` — only if not already present
+4. Reports what was copied or skipped
+
+## Steps
+
+Follow these steps exactly:
+
+### 1. Find the plugin root directory
+
+Search for the plugin in the known Claude Code plugin cache location:
+
+```bash
+PLUGIN_ROOT=""
+CANDIDATES=(
+  "$HOME/.claude/plugins/cache/komluk-scaffolding/claude-scaffolding"
+  "$HOME/.claude/plugins/marketplaces/komluk-scaffolding/plugins/claude-scaffolding"
+)
+for dir in "${CANDIDATES[@]}"; do
+  # Find the latest version subdirectory if present, or use the dir directly
+  if [ -f "$dir/CLAUDE.md" ]; then
+    PLUGIN_ROOT="$dir"
+    break
+  fi
+  # Try version subdirs (e.g. 1.0.0/)
+  latest=$(ls -d "$dir"/*/CLAUDE.md 2>/dev/null | sort -V | tail -1 | xargs dirname 2>/dev/null || true)
+  if [ -n "$latest" ] && [ -f "$latest/CLAUDE.md" ]; then
+    PLUGIN_ROOT="$latest"
+    break
+  fi
+done
+echo "Plugin root: ${PLUGIN_ROOT:-NOT FOUND}"
+```
+
+If `PLUGIN_ROOT` is empty, report that the plugin was not found and stop. The user may need to run `/plugin install claude-scaffolding@komluk-scaffolding` first.
+
+### 2. Copy CLAUDE.md
+
+```bash
+if [ -f "$CWD/CLAUDE.md" ]; then
+  echo "SKIP: $CWD/CLAUDE.md already exists"
+else
+  cp "$PLUGIN_ROOT/CLAUDE.md" "$CWD/CLAUDE.md"
+  echo "COPIED: CLAUDE.md -> $CWD/CLAUDE.md"
+fi
+```
+
+### 3. Copy settings.json
+
+```bash
+mkdir -p "$CWD/.claude"
+if [ -f "$CWD/.claude/settings.json" ]; then
+  echo "SKIP: $CWD/.claude/settings.json already exists"
+else
+  cp "$PLUGIN_ROOT/settings.json" "$CWD/.claude/settings.json"
+  echo "COPIED: settings.json -> $CWD/.claude/settings.json"
+fi
+```
+
+### 4. Report result
+
+Print a summary listing each file: COPIED or SKIPPED, and its destination path.
+
+After copying, inform the user:
+- CLAUDE.md is now in the project root — Claude will load the routing protocol on every session
+- settings.json is now in `.claude/` — hooks and agent permissions are active
+- If either file was skipped (already existed), they can manually merge from the plugin root
+
+## Notes
+
+- This command is idempotent — safe to run multiple times, existing files are never overwritten
+- For full parametrization (custom project name, test commands, SonarQube key), use the
+  `install.sh` flow instead: `./install.sh --target /path/to/project`
+- To update an existing CLAUDE.md, delete it first then re-run this command

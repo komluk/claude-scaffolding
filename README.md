@@ -77,11 +77,27 @@ zmienic wartosci edytujac `~/.claude-scaffolding.env` i uruchamiajac:
 co jest idempotentne -- kazde kolejne wywolanie daje identyczny wynik bez
 interakcji.
 
+### CLAUDE.md i routing protokol
+
+> **WAZNE:** Claude Code czyta `CLAUDE.md` tylko z `$CWD/CLAUDE.md`, `~/.claude/CLAUDE.md`
+> i katalogow nadrzednych. Plik zainstalowany przez plugin NIE jest automatycznie
+> ladowany do kontekstu projektu.
+>
+> **Flow 1 (Plugin `/plugin install`)** -- CLAUDE.md musi byc skopiowany recznie:
+> ```
+> /init-claude-scaffolding
+> ```
+> Ta komenda kopiuje `CLAUDE.md` i `settings.json` do biezacego projektu (bez nadpisywania).
+> Po tym Claude beqdzie respektowal routing agentow i protokol delegacji w kazdym projekcie.
+>
+> **Flow 2 (`./install.sh --target /path/to/repo`)** -- `install.sh` kopiuje `CLAUDE.md`
+> automatycznie razem ze wszystkimi innymi komponentami. Nie trzeba zadnych dodatkowych krokow.
+
 ### Kiedy ktorego flow uzyc?
 
 | Potrzeba | Flow |
 |----------|------|
-| Szybka instalacja z defaultami | Opcja A (Plugin) |
+| Szybka instalacja z defaultami | Opcja A (Plugin) + `/init-claude-scaffolding` |
 | Upgrade przez `/plugin update` | Opcja A (Plugin) |
 | Wlasny `__CLAUDE_SCAFFOLDING_PROJECT_NAME__`, klucz Sonar, test commands | Opcja B (install.sh) |
 | Integracja per-project `.claude/` vs user-level | Opcja B (install.sh --target) |
