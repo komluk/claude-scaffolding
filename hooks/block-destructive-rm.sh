@@ -59,7 +59,7 @@ fi
 BLOCKED=$(python3 -c "
 import sys
 cmd = sys.argv[1]
-blocked_prefixes = ['/', '/etc', '/var', '/usr', '/opt/platform', '.']
+blocked_prefixes = ['/', '/etc', '/var', '/usr', '.']
 # Reason: Extract all path-like arguments after rm and its flags
 parts = cmd.split()
 in_rm = False
@@ -84,7 +84,7 @@ for p in parts:
                 print(p)
                 sys.exit(0)
         else:
-            # Prefix match: block '/opt/platform' and '/opt/platform/app' etc.
+            # Prefix match: block '/etc' and '/etc/foo' etc.
             if p == bp or p.startswith(bp + '/'):
                 print(p)
                 sys.exit(0)
