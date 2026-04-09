@@ -45,6 +45,12 @@ Nastepnie w sesji Claude Code:
 /plugin install claude-scaffolding@komluk-scaffolding
 ```
 
+> **Po instalacji (WAZNE):** Po `/plugin install` musisz uruchomic `/reload-plugins`
+> LUB zaczac nowa sesje `claude` zanim agenci beda dostepni. To jest quirk Claude Code:
+> rejestr `subagent_type` nie hot-reloaduje sie po instalacji pluginu. Bez tego kroku
+> `Task(subagent_type="developer")` zwroci `Agent type 'developer' not found`.
+
+
 Plugin trafi do `~/.claude/plugins/cache/komluk-scaffolding/claude-scaffolding/<version>/`
 i jego komponenty sa natychmiast dostepne. Parametry sa zaszyte jako
 sensowne defaulty (`pytest`, `npm test`, `./backend`, itd.) -- jesli

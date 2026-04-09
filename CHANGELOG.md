@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   decision tree, delegation format) on every new and resumed session. Fixes the
   problem where Claude ignores agents and skills in projects installed via
   `/plugin install` because the plugin's `CLAUDE.md` is not in `$CWD`.
+- `hooks/session-start-protocol.sh`: new dedicated script that outputs the
+  routing protocol via JSON `hookSpecificOutput.additionalContext` format.
+  This is the correct mechanism per Claude Code hook docs — plain `echo` text
+  is treated as low-priority debug context; `additionalContext` in JSON output
+  is injected at full system-context weight. Both `startup` and `resume`
+  matchers now call this script instead of inline `echo` commands.
 - `/init-claude-scaffolding` slash command for the marketplace-install flow:
   detects the plugin directory and copies `CLAUDE.md` + `settings.json` into the
   current project (no overwrite). Closes the gap between plugin install and
