@@ -1,0 +1,99 @@
+---
+name: semantic-memory-mcp
+description: "Directives for proactive use of semantic memory MCP tools (semantic_search, semantic_store, semantic_recall). Ensures agents actively leverage vector-similarity memory during tasks."
+---
+
+# Semantic Memory MCP Usage
+
+You have access to three MCP tools for semantic memory. Use them PROACTIVELY -- do not wait to be asked.
+
+## Tools Available
+
+| Tool | Purpose | All agents | Write agents only |
+|------|---------|------------|-------------------|
+| `semantic_search` | Find memories by similarity query | Yes | -- |
+| `semantic_recall` | Get formatted memories for current context | Yes | -- |
+| `semantic_store` | Store a new memory with embedding | -- | Yes |
+
+Write agents: developer, architect, debugger, analyst, researcher, reviewer, performance-optimizer.
+Read-only agents: tech-writer, devops, gitops.
+
+## WHEN to Search Memory
+
+### At task start (MANDATORY for these scenarios):
+- You encounter an **unfamiliar pattern** or module you haven't worked with before
+- The task involves a **subsystem with known quirks** (deployment, async, database)
+- You are **debugging** and the error message or stack trace is unclear
+- You are making an **architecture or design decision**
+
+### Mid-task (RECOMMENDED):
+- You hit an **unexpected error** -- search for the error message or pattern
+- You are about to **implement a workaround** -- check if someone already solved it
+- You need to understand **why a decision was made** in the codebase
+
+### How to search effectively:
+- Use natural language queries describing the problem, not code snippets
+- Keep queries under 100 words for best embedding match
+- Use `semantic_search` when you want structured results with metadata
+- Use `semantic_recall` when you want a quick formatted summary
+
+### Examples:
+```
+semantic_recall(context="SQLAlchemy async session event loop issues")
+semantic_search(query="deployment nginx proxy configuration gotchas")
+semantic_search(query="Redis task queue timeout handling", agent_name="debugger")
+```
+
+## WHEN to Store Memory (Write Agents Only)
+
+### MUST store (after confirming the insight is correct):
+- **Root cause of a non-obvious bug** -- especially if it took >5 minutes to find
+- **Architecture decision with rationale** -- why X was chosen over Y
+- **Integration gotcha** -- something that fails silently or behaves unexpectedly
+- **Pattern that deviates from convention** -- and why the deviation exists
+
+### SHOULD store:
+- **Workaround for a known limitation** -- with context on when it applies
+- **Performance finding** -- specific numbers or thresholds discovered
+- **Configuration requirement** -- non-obvious setup step that blocks progress
+
+### Do NOT store:
+- Task-specific context (use conversation memory instead)
+- Information already in CLAUDE.md, docs/, or KNOWLEDGE.md
+- Speculative or unverified conclusions
+- Raw code snippets >500 chars (summarize the insight instead)
+- Routine operations (file created, test passed, etc.)
+
+### How to store effectively:
+- Write content as a **self-contained insight** another agent can understand without context
+- Include the **why**, not just the what
+- Use descriptive `tags` for filtering (3-5 tags)
+- Set `content_type` correctly: `learning`, `error`, `pattern`, or `decision`
+- Keep content under 500 chars when possible (max 2000)
+
+### Examples:
+```
+semantic_store(
+  content="TextBuffer in step event pipeline buffers assistant_text and thinking events but passes all others through immediately. If you add a new bufferable event type, you must add it to TextBuffer._BUFFERED_TYPES or events will be lost silently.",
+  agent_name="debugger",
+  content_type="pattern",
+  tags=["step-events", "text-buffer", "pipeline"]
+)
+
+semantic_store(
+  content="When creating async SQLAlchemy engine in a worker thread, you must create a NEW engine+session bound to that thread's event loop. Reusing the module-level async_session_maker causes 'attached to a different loop' errors.",
+  agent_name="developer",
+  content_type="error",
+  tags=["sqlalchemy", "async", "threading", "event-loop"]
+)
+```
+
+## Quality Gate
+
+Before storing, self-check:
+1. Is this insight **reusable** by future agents? (not task-specific)
+2. Is it **verified** through actual experience? (not speculative)
+3. Is it **not already documented** in CLAUDE.md, docs/, or agent-memory files?
+4. Would it save another agent **>5 minutes** of investigation?
+
+If all four are YES, store it. Otherwise, skip or use file-based conversation memory.
