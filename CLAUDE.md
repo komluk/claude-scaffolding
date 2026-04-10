@@ -21,22 +21,22 @@ Project: `(project)`
 
 Route via Task tool with subagent_type:
 ```
-Task(subagent_type="scaffolding:agent-name", prompt="Your task prompt here")
+Task(subagent_type="agent-name", prompt="Your task prompt here")
 ```
 
 | Agent | When to Use |
 |-------|-------------|
-| **scaffolding:analyst** | Ambiguous requests, requirements, scope assessment, feasibility, proposal writing |
-| **scaffolding:architect** | System design, API design, implementation planning, multi-file refactoring, agent orchestration |
-| **scaffolding:researcher** | New API integration, library questions, best practices (gate: score >= 80) |
-| **scaffolding:developer** | Implementation, bug fixes, features, tests, UI/styling (gate: validation passes) |
-| **scaffolding:debugger** | Bug reports, unexpected behavior, errors |
-| **scaffolding:reviewer** | After code changes, security analysis, threat modeling (gate: no criticals) |
-| **scaffolding:performance-optimizer** | Performance issues, database design, schema, migrations, queries |
-| **scaffolding:tech-writer** | Documentation, CHANGELOG updates |
-| **scaffolding:devops** | CI/CD, deployment, infrastructure |
-| **scaffolding:gitops** | Branch management, conflict resolution, git history, worktree recovery, push to remote |
-| **scaffolding:coordinator** | Analyzes tasks, decomposes into agent step sequences for dynamic execution |
+| **analyst** | Ambiguous requests, requirements, scope assessment, feasibility, proposal writing |
+| **architect** | System design, API design, implementation planning, multi-file refactoring, agent orchestration |
+| **researcher** | New API integration, library questions, best practices (gate: score >= 80) |
+| **developer** | Implementation, bug fixes, features, tests, UI/styling (gate: validation passes) |
+| **debugger** | Bug reports, unexpected behavior, errors |
+| **reviewer** | After code changes, security analysis, threat modeling (gate: no criticals) |
+| **performance-optimizer** | Performance issues, database design, schema, migrations, queries |
+| **tech-writer** | Documentation, CHANGELOG updates |
+| **devops** | CI/CD, deployment, infrastructure |
+| **gitops** | Branch management, conflict resolution, git history, worktree recovery, push to remote |
+| **coordinator** | Analyzes tasks, decomposes into agent step sequences for dynamic execution |
 
 ---
 
@@ -44,21 +44,21 @@ Task(subagent_type="scaffolding:agent-name", prompt="Your task prompt here")
 
 **NEVER answer directly. ALWAYS delegate.**
 
-- Bug fix -> scaffolding:debugger -> scaffolding:developer
-- Complex feature -> scaffolding:analyst (proposal) -> scaffolding:architect (design) -> scaffolding:developer
-- Simple feature / tests / UI -> scaffolding:developer
-- Code/implementation question -> scaffolding:developer
-- Architecture/technical question -> scaffolding:architect
-- Requirements / scope / feasibility -> scaffolding:analyst
-- Docs / usage / library -> scaffolding:researcher -> scaffolding:tech-writer
-- Planning / ambiguous request -> scaffolding:analyst
-- Review / security -> scaffolding:reviewer
-- CI/CD -> scaffolding:devops
-- Database / performance -> scaffolding:performance-optimizer
-- Git operations / worktree / commit / merge / push -> scaffolding:gitops
-- After ANY worktree agent completes -> scaffolding:gitops (commit + merge + push)
-- Multi-agent coordination / dynamic task decomposition -> scaffolding:coordinator
-- Default -> scaffolding:analyst
+- Bug fix -> debugger -> developer
+- Complex feature -> analyst (proposal) -> architect (design) -> developer
+- Simple feature / tests / UI -> developer
+- Code/implementation question -> developer
+- Architecture/technical question -> architect
+- Requirements / scope / feasibility -> analyst
+- Docs / usage / library -> researcher -> tech-writer
+- Planning / ambiguous request -> analyst
+- Review / security -> reviewer
+- CI/CD -> devops
+- Database / performance -> performance-optimizer
+- Git operations / worktree / commit / merge / push -> gitops
+- After ANY worktree agent completes -> gitops (commit + merge + push)
+- Multi-agent coordination / dynamic task decomposition -> coordinator
+- Default -> analyst
 
 ---
 
@@ -78,15 +78,15 @@ Use Task tool with subagent_type parameter:
 
 ```python
 Task(
-    subagent_type="scaffolding:developer",
+    subagent_type="developer",
     prompt="Update Button.tsx to add onClick handler",
     description="Add click handler"
 )
 ```
 
 **Available subagent_type values:**
-- scaffolding:analyst, scaffolding:architect, scaffolding:researcher, scaffolding:developer
-- scaffolding:debugger, scaffolding:reviewer, scaffolding:performance-optimizer, scaffolding:tech-writer, scaffolding:devops, scaffolding:gitops, scaffolding:coordinator
+- analyst, architect, researcher, developer
+- debugger, reviewer, performance-optimizer, tech-writer, devops, gitops, coordinator
 
 ---
 
@@ -94,11 +94,11 @@ Task(
 
 **CRITICAL: When spawning agents in worktrees (`isolation: "worktree"`), the orchestrator MUST follow this sequence:**
 
-1. **Spawn scaffolding:developer/scaffolding:architect** in worktree — they write code and run tests. They do NOT commit.
+1. **Spawn developer/architect** in worktree — they write code and run tests. They do NOT commit.
 2. **After agent completes**, check the worktree result for `worktreePath` and `worktreeBranch`.
-3. **Spawn scaffolding:gitops** (NOT in worktree) to commit + merge + push:
+3. **Spawn gitops** (NOT in worktree) to commit + merge + push:
    ```
-   Agent(subagent_type="scaffolding:gitops", prompt="
+   Agent(subagent_type="gitops", prompt="
      Worktree at {worktreePath} on branch {worktreeBranch} has uncommitted changes from developer.
      1. cd into worktree, git add -A, git commit -m '...'
      2. cd back to main repo, git merge {worktreeBranch} --no-edit

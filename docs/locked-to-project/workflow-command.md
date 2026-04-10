@@ -37,12 +37,12 @@ Without `/workflow`, you can still orchestrate agents manually using the
 `Task` tool directly. Example sequence for a feature:
 
 ```
-Task(subagent_type="scaffolding:analyst", prompt="...")       # writes proposal.md
-Task(subagent_type="scaffolding:architect", prompt="...")     # writes design.md + tasks.md
-Task(subagent_type="scaffolding:developer", prompt="...")     # implements
-Task(subagent_type="scaffolding:reviewer", prompt="...")      # reviews
-Task(subagent_type="scaffolding:tech-writer", prompt="...")   # updates docs
-Task(subagent_type="scaffolding:gitops", prompt="...")        # commits and pushes
+Task(subagent_type="analyst", prompt="...")       # writes proposal.md
+Task(subagent_type="architect", prompt="...")     # writes design.md + tasks.md
+Task(subagent_type="developer", prompt="...")     # implements
+Task(subagent_type="reviewer", prompt="...")      # reviews
+Task(subagent_type="tech-writer", prompt="...")   # updates docs
+Task(subagent_type="gitops", prompt="...")        # commits and pushes
 ```
 
 This is what the `CLAUDE.md` Decision Tree documents as the fallback.

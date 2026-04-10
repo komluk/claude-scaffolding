@@ -24,10 +24,10 @@ Cele:
 
 ### Ktery flow instalacji wybrac?
 
-| Flow | Kiedy uzywac | Przestrzen nazw agentow |
-|------|-------------|------------------------|
-| `/plugin install claude-scaffolding@komluk-scaffolding` | Wiekszos uzytkownikow, zero-config, natywny marketplace Claude Code | `scaffolding:developer` (z prefixem) |
-| `./install.sh --target /path/to/repo` | Chcesz pliki skopiowane do drzewa repo, wlasna konfiguracja przez `~/.claude-scaffolding.env` | `developer` (bare -- install.sh usuwa prefix automatycznie) |
+| Flow | Kiedy uzywac |
+|------|-------------|
+| `/plugin install claude-scaffolding@komluk-scaffolding` | Wiekszos uzytkownikow, zero-config, natywny marketplace Claude Code |
+| `./install.sh --target /path/to/repo` | Chcesz pliki skopiowane do drzewa repo, wlasna konfiguracja przez `~/.claude-scaffolding.env` |
 
 Dodatkowe wskazowki:
 
@@ -58,11 +58,11 @@ gh auth login
 2. /plugin install claude-scaffolding@komluk-scaffolding
 3. /reload-plugins                       ← WYMAGANE: Claude Code nie hot-reloaduje rejestru agentow
 4. (opcjonalnie) /init-claude-scaffolding   ← patrz: "Czy potrzebujesz /init-claude-scaffolding?" ponizej
-5. Task(subagent_type="scaffolding:developer", prompt="...")
+5. Task(subagent_type="developer", prompt="...")
 ```
 
 > **Bez `/reload-plugins`** rejestr `subagent_type` nie zostaje odswiezone po instalacji
-> pluginu -- `Task(subagent_type="scaffolding:developer")` zwroci blad
+> pluginu -- `Task(subagent_type="developer")` zwroci blad
 > `Agent type not found`. Mozna tez zamiast `/reload-plugins` zrestartowac cala sesje `claude`.
 
 Plugin trafi do `~/.claude/plugins/cache/komluk-scaffolding/claude-scaffolding/<version>/`.
@@ -99,8 +99,7 @@ co jest idempotentne -- kazde kolejne wywolanie daje identyczny wynik bez
 interakcji.
 
 `install.sh` automatycznie kopiuje `CLAUDE.md` i `settings.json` do katalogu
-docelowego oraz usuwa prefix `scaffolding:` z wyrenderowanych plikow.
-Nie trzeba zadnych dodatkowych krokow -- agenci sa od razu dostepni jako bare names
+docelowego. Agenci sa od razu dostepni jako bare names
 (np. `Task(subagent_type="developer")`).
 
 ---
@@ -130,7 +129,7 @@ Dotyczy wylacznie flow z pluginem -- install.sh robi to automatycznie.
 
 **"Agent type 'developer' not found"**
 - Zapomniałeś uruchomic `/reload-plugins` po instalacji, LUB
-- Uzywasz bare name `developer` w flow z pluginem -- uzyj `scaffolding:developer`.
+- Zrestartuj Claude Code lub uruchom `/reload-plugins` aby odswiezyc rejestr agentow.
 
 **"Claude ignoruje protokol delegacji"**
 - Plugin zaladowany, ale `/reload-plugins` nie byl uruchomiony po instalacji, LUB
