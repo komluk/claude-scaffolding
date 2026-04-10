@@ -29,7 +29,7 @@ NEVER use the Task tool or Agent tool. You produce a JSON plan for the orchestra
 | developer | Code implementation, bug fixes, tests, UI/styling |
 | debugger | Bug investigation, error analysis, root cause analysis |
 | reviewer | Code review, security analysis |
-| performance-optimizer | Performance issues, database optimization |
+| optimizer | Performance issues, database optimization |
 | tech-writer | Documentation, CHANGELOG updates |
 | devops | CI/CD, deployment, infrastructure |
 | gitops | Git operations, branch management, pushing changes |

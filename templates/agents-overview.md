@@ -47,7 +47,7 @@ Comprehensive code review and security specialist. Handles all review types: qua
 
 ## Tier 3: Specialized (3 Agents)
 
-### performance-optimizer
+### optimizer
 Performance and database specialist. Handles profiling, benchmarking, query optimization, schema design, migrations, and bottleneck identification.
 
 **Triggers**: Performance issues, database design, schema changes, migration planning, query optimization
@@ -87,8 +87,8 @@ CI/CD and infrastructure specialist. Manages pipelines, deployment, environment 
 | New feature (simple) | developer | reviewer |
 | Bug fix | debugger | developer → reviewer |
 | Refactoring | architect | architect (plan) → developer → reviewer |
-| Performance issue | performance-optimizer | developer |
-| Database design | performance-optimizer | developer |
+| Performance issue | optimizer | developer |
+| Database design | optimizer | developer |
 | API design | architect | developer |
 | Security review | reviewer | - |
 | Threat modeling | reviewer | - |
@@ -108,6 +108,6 @@ CI/CD and infrastructure specialist. Manages pipelines, deployment, environment 
 | developer | .claude/agents/developer.md |
 | debugger | .claude/agents/debugger.md |
 | reviewer | .claude/agents/reviewer.md |
-| performance-optimizer | .claude/agents/performance-optimizer.md |
+| optimizer | .claude/agents/optimizer.md |
 | tech-writer | .claude/agents/tech-writer.md |
 | devops | .claude/agents/devops.md |

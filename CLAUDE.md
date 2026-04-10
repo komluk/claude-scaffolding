@@ -32,7 +32,7 @@ Task(subagent_type="agent-name", prompt="Your task prompt here")
 | **developer** | Implementation, bug fixes, features, tests, UI/styling (gate: validation passes) |
 | **debugger** | Bug reports, unexpected behavior, errors |
 | **reviewer** | After code changes, security analysis, threat modeling (gate: no criticals) |
-| **performance-optimizer** | Performance issues, database design, schema, migrations, queries |
+| **optimizer** | Performance issues, database design, schema, migrations, queries |
 | **tech-writer** | Documentation, CHANGELOG updates |
 | **devops** | CI/CD, deployment, infrastructure |
 | **gitops** | Branch management, conflict resolution, git history, worktree recovery, push to remote |
@@ -54,7 +54,7 @@ Task(subagent_type="agent-name", prompt="Your task prompt here")
 - Planning / ambiguous request -> analyst
 - Review / security -> reviewer
 - CI/CD -> devops
-- Database / performance -> performance-optimizer
+- Database / performance -> optimizer
 - Git operations / worktree / commit / merge / push -> gitops
 - After ANY worktree agent completes -> gitops (commit + merge + push)
 - Multi-agent coordination / dynamic task decomposition -> coordinator
@@ -86,7 +86,7 @@ Task(
 
 **Available subagent_type values:**
 - analyst, architect, researcher, developer
-- debugger, reviewer, performance-optimizer, tech-writer, devops, gitops, coordinator
+- debugger, reviewer, optimizer, tech-writer, devops, gitops, coordinator
 
 ---
 

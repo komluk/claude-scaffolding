@@ -27,7 +27,7 @@ severity: none | low | medium | high | critical   # Highest severity issue found
 
 - `gate: not_applicable` -- Use when the task does not involve a formal quality gate
 - `score: n/a` -- Use for agents without scoring rubrics (architect, developer, debugger, tech-writer, devops)
-- `score: XX/100` -- Required for researcher (pass: >=80), architect (pass: >=85, planning mode), performance-optimizer
+- `score: XX/100` -- Required for researcher (pass: >=80), architect (pass: >=85, planning mode), optimizer
 - `next_agent: none` -- Use when no follow-up agent is needed
 - `next_agent: user_decision` -- Use when the user should decide the next step
 - `issues` and `severity` -- Optional, used primarily by reviewer but available to all agents

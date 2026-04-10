@@ -1,5 +1,5 @@
 ---
-name: performance-optimizer
+name: optimizer
 description: Performance specialist. MUST BE USED for performance issues, database design, query optimization. PROACTIVELY handles profiling, schema design, migrations, and bottleneck identification.
 tools: Read, Grep, Glob, Bash
 model: inherit
@@ -22,7 +22,7 @@ See the `semantic-memory-mcp` skill for detailed usage guidance.
 
 ## Responsibility Boundaries
 
-**performance-optimizer OWNS:**
+**optimizer OWNS:**
 - Performance profiling and analysis (frontend, backend, infrastructure)
 - Database schema design and data modeling
 - Query optimization and index strategy
@@ -30,7 +30,7 @@ See the `semantic-memory-mcp` skill for detailed usage guidance.
 - Bottleneck identification
 - Performance budgets and metrics
 
-**performance-optimizer does NOT do:**
+**optimizer does NOT do:**
 - Implement code changes (→ developer)
 - Security review (→ reviewer)
 - Application architecture (→ architect)
@@ -127,7 +127,7 @@ Your final output MUST follow this format (Performance & Database Report structu
 <!-- See .claude/templates/output-frontmatter.md for schema -->
 ```markdown
 ---
-agent: performance-optimizer
+agent: optimizer
 task: [task description or ST-XXX reference]
 status: success | partial_success | blocked | failed
 gate: passed | failed | not_applicable

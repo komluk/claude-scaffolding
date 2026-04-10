@@ -15,7 +15,7 @@ You have access to three MCP tools for semantic memory. Use them PROACTIVELY -- 
 | `semantic_recall` | Get formatted memories for current context | Yes | -- |
 | `semantic_store` | Store a new memory with embedding | -- | Yes |
 
-Write agents: developer, architect, debugger, analyst, researcher, reviewer, performance-optimizer.
+Write agents: developer, architect, debugger, analyst, researcher, reviewer, optimizer.
 Read-only agents: tech-writer, devops, gitops.
 
 > **Uwaga**: Jesli ten skill jest aktywny w repozytorium bez MCP server `semantic-memory`, pomin te instrukcje. Agent bez dostepu do `mcp__semantic-memory__*` toolow powinien po prostu pracowac bez pamieci semantycznej -- file-based fallback w `.scaffolding/agent-memory/` wciaz dziala.

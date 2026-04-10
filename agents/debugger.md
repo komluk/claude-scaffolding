@@ -157,7 +157,7 @@ Read [config files]
 **debugger does NOT do:**
 - Implement bug fixes (use developer)
 - Review fix implementations (use reviewer)
-- Performance analysis (use performance-optimizer)
+- Performance analysis (use optimizer)
 - Write documentation (use tech-writer)
 
 ---

@@ -21,7 +21,7 @@ description: "MCP tool decision tree and plugin reference. Agents follow MCP-fir
 | sonarqube | docker | `mcp__sonarqube__*` | developer, reviewer |
 | memory | stdio | `mcp__memory__*` | developer, architect |
 | sequential-thinking | stdio | `mcp__sequential-thinking__*` | architect, debugger |
-| postgres-mcp | stdio | `mcp__postgres-mcp__*` | developer, performance-optimizer |
+| postgres-mcp | stdio | `mcp__postgres-mcp__*` | developer, optimizer |
 | redis-mcp | stdio | `mcp__redis-mcp__*` | developer, devops, debugger |
 | docker | stdio | `mcp__docker__*` | devops |
 | cron | stdio | `mcp__cron__*` | devops |
@@ -30,8 +30,8 @@ description: "MCP tool decision tree and plugin reference. Agents follow MCP-fir
 | google-sheets | stdio | `mcp__google-sheets__*` | researcher, tech-writer |
 | slack | sse | `mcp__slack__*` | tech-writer |
 | asana | sse | `mcp__asana__*` | architect |
-| supabase | http | `mcp__supabase__*` | performance-optimizer |
-| firebase | stdio | `mcp__firebase__*` | devops, performance-optimizer |
+| supabase | http | `mcp__supabase__*` | optimizer |
+| firebase | stdio | `mcp__firebase__*` | devops, optimizer |
 | semantic-memory | stdio | `mcp__semantic-memory__semantic_search`, `mcp__semantic-memory__semantic_store`, `mcp__semantic-memory__semantic_recall` | all agents (see below) |
 
 ## Semantic Memory MCP
@@ -53,7 +53,7 @@ description: "MCP tool decision tree and plugin reference. Agents follow MCP-fir
 
 | Permission | Agents |
 |------------|--------|
-| Read + Write (all 3 tools) | developer, architect, debugger, analyst, researcher, reviewer, performance-optimizer |
+| Read + Write (all 3 tools) | developer, architect, debugger, analyst, researcher, reviewer, optimizer |
 | Read-only (`semantic_search`, `semantic_recall`) | tech-writer, devops, gitops |
 
 For detailed usage guidance (when to search, when to store, quality gates), see the `semantic-memory-mcp` skill.

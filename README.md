@@ -61,7 +61,7 @@ git pull
 
 ```
 11 agents      analyst, architect, researcher, developer, debugger,
-               reviewer, performance-optimizer, tech-writer, devops,
+               reviewer, optimizer, tech-writer, devops,
                gitops, coordinator
 
 30 skills      api-design, error-handling, pattern-recognition,
@@ -86,7 +86,7 @@ git pull
 | developer | Code, bug fixes, features, tests, UI |
 | debugger | Errors, unexpected behavior |
 | reviewer | Code review, security analysis |
-| performance-optimizer | Performance, database, queries |
+| optimizer | Performance, database, queries |
 | tech-writer | README, CHANGELOG, docs |
 | devops | CI/CD, deployment, infrastructure |
 | gitops | Git operations, commits, merges, push |
