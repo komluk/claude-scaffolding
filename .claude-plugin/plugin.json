@@ -1,6 +1,7 @@
 {
   "name": "scaffolding",
-  "version": "1.3.0",
+  "version": "1.4.0",
+  "postInstall": "hooks/post-install.sh",
   "description": "Opinionated Claude Code configuration: 30 skills, 11 agents, 14 commands, 7 hooks, spec-driven workflows. Captures the scaffolding.tool orchestration patterns.",
   "author": {
     "name": "komluk",
