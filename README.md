@@ -10,7 +10,7 @@ No special commands. Just talk normally.
 
 ---
 
-## Get started in 30 seconds
+## Get started in 10 seconds
 
 ### Method A — Plugin marketplace (recommended)
 
