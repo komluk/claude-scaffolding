@@ -1,6 +1,6 @@
 {
   "name": "komluk-scaffolding",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "owner": {
     "name": "komluk",
     "url": "https://github.com/komluk"
@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "scaffolding",
-      "source": ".claude-plugin",
+      "source": "./",
       "description": "Opinionated Claude Code configuration for spec-driven multi-agent workflows"
     }
   ]

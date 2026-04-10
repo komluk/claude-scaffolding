@@ -14,7 +14,27 @@ No special commands. Just talk normally.
 
 **Requirements:** git, python3, Claude Code CLI
 
-### Method A — install.sh (recommended)
+### Method A — Plugin marketplace (recommended)
+
+First, add the marketplace (one-time setup):
+
+```bash
+/plugin marketplace add komluk/claude-scaffolding
+```
+
+Then install the plugin:
+
+```bash
+/plugin install scaffolding@komluk-scaffolding
+```
+
+The post-install hook automatically:
+- Creates `.scaffolding/` directory structure
+- Adds `.scaffolding/` to `.gitignore`
+- Copies `CLAUDE.md` (agent routing protocol) to project root
+- Copies `settings.json` (hooks + permissions) to `.claude/`
+
+### Method B — install.sh (manual)
 
 ```bash
 git clone https://github.com/komluk/claude-scaffolding
@@ -22,32 +42,26 @@ cd claude-scaffolding
 ./install.sh --target /path/to/your/project/.claude
 ```
 
-That's it. Open Claude Code in your project and start talking.
-
 The installer auto-detects your test commands, project name, and other settings. Hit Enter to accept defaults, or customize anything. Your choices are saved to `~/.claude-scaffolding.env` and can be changed later.
 
 ---
 
 ## Updating
 
+### Plugin method
+
 ```bash
-cd claude-scaffolding
-git pull
-./install.sh --refresh
+/plugin update scaffolding@komluk-scaffolding
 ```
 
----
-
-## Reinstalling / updating
-
-### Reinstalling (plugin method)
+Or full reinstall:
 
 ```bash
 /plugin uninstall scaffolding@komluk-scaffolding
 /plugin install scaffolding@komluk-scaffolding
 ```
 
-### Updating (install.sh method)
+### install.sh method
 
 ```bash
 cd claude-scaffolding
