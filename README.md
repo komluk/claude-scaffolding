@@ -31,7 +31,7 @@ Then install the plugin:
 After install, initialize the project:
 
 ```bash
-/init-scaffolding
+/scaffolding:init-scaffolding
 ```
 
 This creates the `.scaffolding/` directory, copies `CLAUDE.md` and `settings.json` to your project. **This step is required** — the plugin cannot auto-initialize due to Claude Code plugin system limitations.
@@ -131,10 +131,10 @@ Skills that reference these features degrade gracefully — they skip the unavai
 ## Troubleshooting
 
 ### Agents not routing / Claude answers directly
-Make sure you ran `/init-scaffolding` after installing the plugin. This copies `CLAUDE.md` to your project — without it, Claude doesn't know about the agents.
+Make sure you ran `/scaffolding:init-scaffolding` after installing the plugin. This copies `CLAUDE.md` to your project — without it, Claude doesn't know about the agents.
 
 ### "Agent type 'developer' not found"
-Plugin agents are namespaced. Use `scaffolding:developer` not `developer`. The `CLAUDE.md` copied by `/init-scaffolding` already handles this — if you see this error, re-run `/init-scaffolding`.
+Plugin agents are namespaced. Use `scaffolding:developer` not `developer`. The `CLAUDE.md` copied by `/scaffolding:init-scaffolding` already handles this — if you see this error, re-run `/scaffolding:init-scaffolding`.
 
 ### Plugin install says "not found in any marketplace"
 Re-add the marketplace first:
@@ -143,7 +143,7 @@ Re-add the marketplace first:
 ```
 
 ### .scaffolding/ folder missing
-Run `/init-scaffolding` — it creates the full directory structure.
+Run `/scaffolding:init-scaffolding` — it creates the full directory structure.
 
 ---
 
