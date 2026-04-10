@@ -12,9 +12,9 @@ No special commands. Just talk normally.
 
 ## Get started in 30 seconds
 
-**Requirements:** git, python3, Claude Code CLI
-
 ### Method A — Plugin marketplace (recommended)
+
+**Requirements:** Claude Code CLI only
 
 First, add the marketplace (one-time setup):
 
@@ -36,7 +36,13 @@ After install, initialize the project:
 
 This creates the `.scaffolding/` directory, copies `CLAUDE.md` and `settings.json` to your project. **This step is required** — the plugin cannot auto-initialize due to Claude Code plugin system limitations.
 
+Then **restart Claude Code** (close and reopen) to load the new CLAUDE.md and settings.
+
+That's it. Start talking — Claude will auto-route to the right agent.
+
 ### Method B — install.sh (manual)
+
+**Requirements:** git, python3, Claude Code CLI
 
 ```bash
 git clone https://github.com/komluk/scaffolding
@@ -119,6 +125,25 @@ These features need a running backend and are not part of this plugin:
 - **/distill command** — requires distill CLI + database
 
 Skills that reference these features degrade gracefully — they skip the unavailable section instead of failing. See [docs/locked-to-project/](docs/locked-to-project/README.md) for details.
+
+---
+
+## Troubleshooting
+
+### Agents not routing / Claude answers directly
+Make sure you ran `/init-scaffolding` after installing the plugin. This copies `CLAUDE.md` to your project — without it, Claude doesn't know about the agents.
+
+### "Agent type 'developer' not found"
+Plugin agents are namespaced. Use `scaffolding:developer` not `developer`. The `CLAUDE.md` copied by `/init-scaffolding` already handles this — if you see this error, re-run `/init-scaffolding`.
+
+### Plugin install says "not found in any marketplace"
+Re-add the marketplace first:
+```bash
+/plugin marketplace add komluk/scaffolding
+```
+
+### .scaffolding/ folder missing
+Run `/init-scaffolding` — it creates the full directory structure.
 
 ---
 
